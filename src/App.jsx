@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 const DIMS = [
-  { key: "resonance", label: "Resonance", color: "pink", desc: "Does this evoke emotion or curiosity? Stories that pulse with meaning — even before they're polished — score high here." },
+  { key: "resonance", label: "Resonance", color: "pink", desc: "Does this evoke emotion or curiosity? Stories that pulse with meaning — even before they are polished — score high here." },
   { key: "relevance", label: "Relevance", color: "blue", desc: "Does this align with brand priorities, strategic goals, or customer needs? The best signals connect to something that already matters." },
-  { key: "rarity", label: "Rarity", color: "purple", desc: "Is this surprising, unusual, or not widely told? Rarity is what makes someone stop and say: I've never heard it put that way." },
-  { key: "relatability", label: "Relatability", color: "yellow", desc: "Will people get it? Can it land across different audiences — not just insiders?" },
+  { key: "rarity", label: "Rarity", color: "purple", desc: "Is this surprising, unusual, or not widely told? Rarity is what makes someone stop and say: I have never heard it put that way." },
+  { key: "relatability", label: "Relatability", color: "yellow", desc: "Will people get it? Can it land across different audiences, not just insiders?" },
   { key: "riskReward", label: "Risk", color: "red", desc: "Is it safe to tell? This flags reputational considerations, sensitivities, or timing issues that need to be managed before the story goes anywhere." },
 ];
 
@@ -26,11 +26,11 @@ const SEED_STORIES = [
     score: 87, trend: "rising",
     dims: { resonance: 19, relevance: 16, rarity: 18, relatability: 17, riskReward: 17 },
     rationale: {
-      resonance: "Pride, surprise, and the underdog arc — new hire saves the day is a genuinely moving story.",
+      resonance: "Pride, surprise, and the underdog arc. New hire saves the day is a genuinely moving story.",
       relevance: "Directly supports talent brand and security credibility narratives.",
       rarity: "A junior fix on day 3 is rare enough to stop the scroll.",
       relatability: "Everyone remembers first-week nerves. Universally understood.",
-      riskReward: "Shows vulnerability (we had a bug) and strength (we caught it). That tension is valuable.",
+      riskReward: "Low risk. Shows vulnerability (we had a bug) and strength (we caught it). That tension is valuable.",
     },
     nextStep: "This story is 2 hours old. Urgency modifier: 3/5. Draft a LinkedIn post today before the moment cools. Sarah is available for a quote.",
     audience: "Engineering recruiting, security buyers, culture storytelling",
@@ -44,11 +44,11 @@ const SEED_STORIES = [
     score: 94, trend: "rising",
     dims: { resonance: 20, relevance: 19, rarity: 17, relatability: 18, riskReward: 20 },
     rationale: {
-      resonance: "This story saves lives. That's the highest emotional register possible.",
+      resonance: "This story saves lives. That is the highest emotional register possible.",
       relevance: "Perfect timing for healthcare vertical expansion.",
-      rarity: "67% reduction is a dramatic, measurable result — not easy to dismiss.",
+      rarity: "67% reduction is a dramatic, measurable result that is not easy to dismiss.",
       relatability: "Everyone has waited in an ER. The stakes are visceral and immediate.",
-      riskReward: "Healthcare outcomes are high-stakes territory. Publishing this takes confidence.",
+      riskReward: "Healthcare outcomes are high-stakes territory. HIPAA review required before publishing.",
     },
     nextStep: "Highest-value story in the feed. Urgency modifier: 4/5. Begin HIPAA review and customer approval process today. This belongs in your next investor update and sales deck.",
     audience: "Healthcare prospects, investors, PR targets",
@@ -62,13 +62,13 @@ const SEED_STORIES = [
     score: 76, trend: "stable",
     dims: { resonance: 15, relevance: 18, rarity: 14, relatability: 16, riskReward: 13 },
     rationale: {
-      resonance: "Good underdog energy but lacks a personal arc — we don't know enough about the contractor yet.",
+      resonance: "Good underdog energy but lacks a personal arc. We do not know enough about the contractor yet.",
       relevance: "Strong fit for remote work culture and cost-efficiency narratives.",
-      rarity: "Cost savings are common. The Montana detail adds color but doesn't transform the story.",
-      relatability: "Remote work resonates broadly in 2025.",
-      riskReward: "Safe story. Well-told but unlikely to provoke strong reaction either way.",
+      rarity: "Cost savings are common. The Montana detail adds color but does not transform the story.",
+      relatability: "Remote work resonates broadly.",
+      riskReward: "Evergreen and safe. Well-told but unlikely to provoke strong reaction either way.",
     },
-    nextStep: "Evergreen, no urgency pressure. Spend 30 minutes getting the contractor's personal backstory. The Montana detail could become the whole story with the right angle.",
+    nextStep: "Evergreen. No urgency pressure. Spend 30 minutes getting the contractor's personal backstory. The Montana detail could become the whole story with the right angle.",
     audience: "Remote work advocates, cost-conscious buyers, talent acquisition",
     formats: ["Blog post", "Internal newsletter", "LinkedIn"],
   },
@@ -86,6 +86,98 @@ function ScoreBar({ value, colorClass }) {
     <div className="w-full bg-gray-700 rounded-full h-1.5">
       <div className={`h-1.5 rounded-full transition-all duration-700 ${colorClass}`}
         style={{ width: `${(value / 20) * 100}%` }} />
+    </div>
+  );
+}
+
+function IntroScreen({ onEnter }) {
+  return (
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-8">
+      <div className="max-w-4xl w-full">
+        <div className="mb-10 text-center">
+          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-400 mb-3">
+            Story Signal Scout
+          </h1>
+          <p className="text-gray-400 text-lg mb-6">Narrative Intelligence</p>
+          <p className="text-gray-300 text-base max-w-2xl mx-auto leading-relaxed">
+            The best stories inside organizations are not hiding. They are passing us by — in leadership calls, Slack threads, and hallway conversations. Story Signal Scout helps you notice the narrative gold before it is lost. It listens like a journalist, scores like a strategist, and guides like a creative director.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-8 mb-12">
+          <div>
+            <h2 className="text-base font-semibold mb-5 text-gray-400 uppercase tracking-wide">Signals passing by right now</h2>
+            <div className="space-y-3">
+              <div className="bg-gray-800/60 rounded-lg p-4 border-l-2 border-gray-600">
+                <div className="text-xs text-gray-500 mb-1">Lost in #customer-success</div>
+                <div className="text-sm text-gray-300">"Regional hospital cut ER wait times by 67% using our platform"</div>
+                <div className="text-xs text-gray-500 mt-2">Never became a case study</div>
+              </div>
+              <div className="bg-gray-800/60 rounded-lg p-4 border-l-2 border-gray-600">
+                <div className="text-xs text-gray-500 mb-1">Buried in #engineering</div>
+                <div className="text-sm text-gray-300">"New intern prevented a security breach on day 3"</div>
+                <div className="text-xs text-gray-500 mt-2">Perfect recruiting story, missed</div>
+              </div>
+              <div className="bg-gray-800/60 rounded-lg p-4 border-l-2 border-gray-600">
+                <div className="text-xs text-gray-500 mb-1">Forgotten in a support ticket</div>
+                <div className="text-sm text-gray-300">"This product saved our business during the outage"</div>
+                <div className="text-xs text-gray-500 mt-2">Could have been a PR win</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-base font-semibold mb-5 text-gray-400 uppercase tracking-wide">What if every story had a score?</h2>
+            <div className="bg-gray-800/60 rounded-lg p-5 mb-4">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <div className="font-semibold text-sm">Hospital ER Story</div>
+                  <div className="text-xs text-gray-500 mt-0.5">Customer call transcript</div>
+                </div>
+                <div className="text-3xl font-bold text-green-400">94</div>
+              </div>
+              <div className="space-y-2">
+                {[
+                  { label: "Resonance", val: 20, color: "bg-pink-400" },
+                  { label: "Relevance", val: 19, color: "bg-blue-400" },
+                  { label: "Rarity", val: 17, color: "bg-purple-400" },
+                  { label: "Relatability", val: 18, color: "bg-yellow-400" },
+                  { label: "Risk", val: 20, color: "bg-red-400" },
+                ].map(d => (
+                  <div key={d.label} className="flex items-center gap-3">
+                    <div className="text-xs text-gray-400 w-20 shrink-0">{d.label}</div>
+                    <div className="flex-1 bg-gray-700 rounded-full h-1.5">
+                      <div className={`h-1.5 rounded-full ${d.color}`} style={{ width: `${(d.val / 20) * 100}%` }} />
+                    </div>
+                    <div className="text-xs text-gray-400 w-6 text-right">{d.val}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 pt-3 border-t border-gray-700 text-xs text-gray-500">
+                Five dimensions. Each scored 0-20. Click any bar inside the app to see the rationale.
+              </div>
+            </div>
+
+            <div className="bg-gray-800/40 rounded-lg p-4 flex justify-between items-center">
+              <div>
+                <div className="text-sm text-gray-400">Another product launch announcement</div>
+                <div className="text-xs text-gray-600 mt-1">Low resonance, common story, no tension</div>
+              </div>
+              <div className="text-2xl font-bold text-gray-600">23</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center">
+          <button
+            onClick={onEnter}
+            className="bg-teal-600 hover:bg-teal-500 text-white font-semibold px-10 py-3.5 rounded-lg transition-colors text-sm tracking-wide"
+          >
+            Open Story Signal Scout
+          </button>
+          <div className="text-xs text-gray-600 mt-3">Paste any Slack message, customer quote, or support ticket to score it live</div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -139,7 +231,7 @@ function DeepDive({ story }) {
       </div>
 
       <div>
-        <div className="text-xs font-semibold text-gray-400 uppercase mb-3">Score Breakdown</div>
+        <div className="text-xs font-semibold text-gray-400 uppercase mb-3">Score Breakdown — click any dimension to see why</div>
         <div className="space-y-2">
           {DIMS.map(d => (
             <div key={d.key} className="bg-gray-800 rounded-lg overflow-hidden">
@@ -200,17 +292,29 @@ function AddStoryPanel({ onAdd, onClose }) {
     try {
       const res = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": import.meta.env.VITE_ANTHROPIC_API_KEY,
+          "anthropic-version": "2023-06-01",
+          "anthropic-dangerous-direct-browser-calls": "true",
+        },
         body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
+          model: "claude-sonnet-4-6",
           max_tokens: 1000,
           messages: [{
             role: "user",
-            content: `You are a narrative intelligence engine. Score this story signal using the Story Signal Score framework. Return ONLY valid JSON, no markdown, no explanation outside the JSON.
+            content: `You are Story Signal Scout, a narrative intelligence engine. Score this story signal using the Story Signal Score framework. Return ONLY valid JSON, no markdown, no explanation outside the JSON.
 
 Story text: "${text}"
 
 Score each dimension out of 20 and provide a one-sentence rationale for each score. Also generate a title (max 10 words), recommended next step (2-3 sentences, specific and opinionated), audience fit (one line), and 3 format suggestions.
+
+The five dimensions are:
+- resonance: Does this evoke emotion or curiosity?
+- relevance: Does this align with brand priorities, strategic goals, or customer needs?
+- rarity: Is this surprising, unusual, or not widely told?
+- relatability: Will people get it? Can it land with different audiences?
+- riskReward: Is it safe to tell? Flag any reputational risks or sensitivities.
 
 JSON schema:
 {
@@ -261,13 +365,13 @@ JSON schema:
     <div className="bg-gray-800 border border-teal-500/40 rounded-xl p-5">
       <div className="flex justify-between items-center mb-3">
         <h3 className="font-semibold text-sm text-teal-400">Score a New Signal</h3>
-        <button onClick={onClose} className="text-gray-500 hover:text-gray-300 text-lg leading-none">×</button>
+        <button onClick={onClose} className="text-gray-500 hover:text-gray-300 text-lg leading-none">x</button>
       </div>
       <p className="text-xs text-gray-400 mb-3">Paste a Slack message, customer quote, support ticket — anything with a story in it.</p>
       <textarea
         className="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-sm text-gray-200 resize-none focus:outline-none focus:border-teal-500 transition-colors"
         rows={4}
-        placeholder="e.g. 'Just got off the phone with the Acme team — their VP literally cried when she saw the demo results...'"
+        placeholder="e.g. Just got off the phone with the Acme team — their VP literally cried when she saw the demo results..."
         value={text}
         onChange={e => setText(e.target.value)}
       />
@@ -276,97 +380,8 @@ JSON schema:
         disabled={!text.trim() || loading}
         className="mt-3 w-full bg-teal-600 hover:bg-teal-500 disabled:bg-gray-700 disabled:text-gray-500 text-white text-sm font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
       >
-        {loading ? "Scoring…" : "Score This Signal"}
+        {loading ? "Scoring..." : "Score This Signal"}
       </button>
-    </div>
-  );
-}
-
-function IntroScreen({ onEnter }) {
-  return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-8">
-      <div className="max-w-4xl w-full">
-        <div className="mb-12 text-center">
-          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-400 mb-3">
-            Story Signal
-          </h1>
-          <p className="text-gray-400 text-lg">Narrative Intelligence</p>
-        </div>
-
-        <div className="grid grid-cols-2 gap-8 mb-12">
-          <div>
-            <h2 className="text-xl font-semibold mb-5 text-red-400">Stories disappearing right now</h2>
-            <div className="space-y-3">
-              <div className="bg-gray-800/60 rounded-lg p-4 border-l-2 border-red-500/40">
-                <div className="text-xs text-gray-500 mb-1">Lost in #customer-success</div>
-                <div className="text-sm text-gray-300">"Regional hospital cut ER wait times by 67% using our platform"</div>
-                <div className="text-xs text-red-400 mt-2">Never became a case study</div>
-              </div>
-              <div className="bg-gray-800/60 rounded-lg p-4 border-l-2 border-red-500/40">
-                <div className="text-xs text-gray-500 mb-1">Buried in #engineering</div>
-                <div className="text-sm text-gray-300">"New intern prevented a security breach on day 3"</div>
-                <div className="text-xs text-red-400 mt-2">Perfect recruiting story, missed</div>
-              </div>
-              <div className="bg-gray-800/60 rounded-lg p-4 border-l-2 border-red-500/40">
-                <div className="text-xs text-gray-500 mb-1">Forgotten in a support ticket</div>
-                <div className="text-sm text-gray-300">"This product saved our business during the outage"</div>
-                <div className="text-xs text-red-400 mt-2">Could have been a PR win</div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold mb-5 text-teal-400">What if every story had a score?</h2>
-            <div className="bg-gray-800/60 rounded-lg p-5 mb-4">
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <div className="font-semibold text-sm">Hospital ER Story</div>
-                  <div className="text-xs text-gray-500 mt-0.5">Customer call transcript</div>
-                </div>
-                <div className="text-3xl font-bold text-green-400">94</div>
-              </div>
-              <div className="space-y-2">
-                {[
-                  { label: "Resonance", val: 20, color: "bg-pink-400" },
-                  { label: "Relevance", val: 19, color: "bg-blue-400" },
-                  { label: "Rarity", val: 17, color: "bg-purple-400" },
-                  { label: "Relatability", val: 18, color: "bg-yellow-400" },
-                  { label: "Risk", val: 20, color: "bg-red-400" },
-                ].map(d => (
-                  <div key={d.label} className="flex items-center gap-3">
-                    <div className="text-xs text-gray-400 w-24 shrink-0">{d.label}</div>
-                    <div className="flex-1 bg-gray-700 rounded-full h-1.5">
-                      <div className={`h-1.5 rounded-full ${d.color}`} style={{ width: `${(d.val / 20) * 100}%` }} />
-                    </div>
-                    <div className="text-xs text-gray-400 w-6 text-right">{d.val}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-3 text-xs text-teal-400">
-                Perfect for healthcare sales, investor deck, PR campaign
-              </div>
-            </div>
-
-            <div className="bg-gray-800/40 rounded-lg p-4 flex justify-between items-center">
-              <div>
-                <div className="text-sm text-gray-400">Another product launch announcement</div>
-                <div className="text-xs text-gray-600 mt-1">Low resonance, common story, no tension</div>
-              </div>
-              <div className="text-2xl font-bold text-gray-600">23</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="text-center">
-          <button
-            onClick={onEnter}
-            className="bg-teal-600 hover:bg-teal-500 text-white font-semibold px-10 py-3.5 rounded-lg transition-colors text-sm tracking-wide"
-          >
-            Open Story Signal
-          </button>
-          <div className="text-xs text-gray-600 mt-3">Paste any Slack message, customer quote, or support ticket to score it live</div>
-        </div>
-      </div>
     </div>
   );
 }
@@ -389,11 +404,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col" style={{ fontFamily: "system-ui, sans-serif" }}>
-      {/* Top bar */}
       <div className="border-b border-gray-800 px-6 py-4 flex items-center justify-between">
         <div>
           <span className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-400">
-            Story Signal
+            Story Signal Scout
           </span>
           <span className="text-gray-500 text-sm ml-3">Narrative Intelligence</span>
         </div>
@@ -409,12 +423,9 @@ export default function App() {
         </div>
       </div>
 
-      {/* Body */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Left — Feed */}
         <div className="w-96 shrink-0 border-r border-gray-800 flex flex-col overflow-hidden">
           <div className="p-4 space-y-3 overflow-y-auto flex-1">
-            {/* Add signal button / panel */}
             {addOpen
               ? <AddStoryPanel onAdd={handleAdd} onClose={() => setAddOpen(false)} />
               : <button onClick={() => setAddOpen(true)}
@@ -422,11 +433,9 @@ export default function App() {
                   + Add a signal to score
                 </button>
             }
-
             {filtered.map(s => (
               <StoryCard key={s.id} story={s} selected={selected?.id === s.id} onSelect={setSelected} />
             ))}
-
             {filtered.length === 0 && (
               <div className="text-center text-gray-500 text-sm py-12">
                 No stories above score {minScore}. Lower the filter.
@@ -435,7 +444,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* Right — Deep Dive */}
         <div className="flex-1 overflow-y-auto p-8">
           {selected
             ? <DeepDive story={selected} />
