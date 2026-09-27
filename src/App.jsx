@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 const DIMS = [
-  { key: "resonance", label: "Resonance", color: "pink", desc: "Emotional pull — does it make someone feel something?" },
-  { key: "relevance", label: "Relevance", color: "blue", desc: "Strategic fit — does it advance a business priority?" },
-  { key: "rarity", label: "Rarity", color: "purple", desc: "Surprise factor — is this unexpected or counterintuitive?" },
-  { key: "relatability", label: "Relatability", color: "yellow", desc: "Clarity — would someone outside your company get it instantly?" },
-  { key: "riskReward", label: "Risk / Reward", color: "red", desc: "Boldness — does it say something most companies wouldn't?" },
+  { key: "resonance", label: "Resonance", color: "pink", desc: "Emotional pull. Does it make someone feel something?" },
+  { key: "relevance", label: "Relevance", color: "blue", desc: "Strategic fit. Does it advance a business priority?" },
+  { key: "rarity", label: "Rarity", color: "purple", desc: "Surprise factor. Is this unexpected or counterintuitive?" },
+  { key: "relatability", label: "Relatability", color: "yellow", desc: "Clarity. Would someone outside your company get it instantly?" },
+  { key: "riskReward", label: "Risk / Reward", color: "red", desc: "Boldness. Does it say something most companies wouldn't?" },
 ];
 
 const DIM_COLORS = {
@@ -32,7 +32,7 @@ const SEED_STORIES = [
       relatability: "Everyone remembers first-week nerves. Universally understood.",
       riskReward: "Shows vulnerability (we had a bug) and strength (we caught it). That tension is valuable.",
     },
-    nextStep: "This story is 2 hours old. Urgency modifier: 3/5. Draft a LinkedIn post today before the moment cools — Sarah is available for a quote.",
+    nextStep: "This story is 2 hours old. Urgency modifier: 3/5. Draft a LinkedIn post today before the moment cools. Sarah is available for a quote.",
     audience: "Engineering recruiting, security buyers, culture storytelling",
     formats: ["LinkedIn story", "Recruiting video", "All-hands slide"],
   },
@@ -50,7 +50,7 @@ const SEED_STORIES = [
       relatability: "Everyone has waited in an ER. The stakes are visceral and immediate.",
       riskReward: "Healthcare outcomes are high-stakes territory. Publishing this takes confidence.",
     },
-    nextStep: "Highest-value story in the feed. Urgency modifier: 4/5. Begin HIPAA review and customer approval process today — this belongs in your next investor update and sales deck.",
+    nextStep: "Highest-value story in the feed. Urgency modifier: 4/5. Begin HIPAA review and customer approval process today. This belongs in your next investor update and sales deck.",
     audience: "Healthcare prospects, investors, PR targets",
     formats: ["Case study", "Conference keynote", "PR announcement", "Sales deck"],
   },
@@ -68,7 +68,7 @@ const SEED_STORIES = [
       relatability: "Remote work resonates broadly in 2025.",
       riskReward: "Safe story. Well-told but unlikely to provoke strong reaction either way.",
     },
-    nextStep: "Evergreen — no urgency pressure. Spend 30 minutes getting the contractor's personal backstory. The Montana detail could become the whole story with the right angle.",
+    nextStep: "Evergreen, no urgency pressure. Spend 30 minutes getting the contractor's personal backstory. The Montana detail could become the whole story with the right angle.",
     audience: "Remote work advocates, cost-conscious buyers, talent acquisition",
     formats: ["Blog post", "Internal newsletter", "LinkedIn"],
   },
@@ -200,12 +200,7 @@ function AddStoryPanel({ onAdd, onClose }) {
     try {
       const res = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
-        headers: {
-  "Content-Type": "application/json",
-  "x-api-key": import.meta.env.VITE_ANTHROPIC_API_KEY,
-  "anthropic-version": "2023-06-01",
-  "anthropic-dangerous-direct-browser-calls": "true",
-},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           model: "claude-sonnet-4-20250514",
           max_tokens: 1000,
