@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 const DIMS = [
-  { key: "resonance", label: "Resonance", color: "pink", desc: "Emotional pull. Does it make someone feel something?" },
-  { key: "relevance", label: "Relevance", color: "blue", desc: "Strategic fit. Does it advance a business priority?" },
-  { key: "rarity", label: "Rarity", color: "purple", desc: "Surprise factor. Is this unexpected or counterintuitive?" },
-  { key: "relatability", label: "Relatability", color: "yellow", desc: "Clarity. Would someone outside your company get it instantly?" },
-  { key: "riskReward", label: "Risk / Reward", color: "red", desc: "Boldness. Does it say something most companies wouldn't?" },
+  { key: "resonance", label: "Resonance", color: "pink", desc: "Does this evoke emotion or curiosity? Stories that pulse with meaning — even before they're polished — score high here." },
+  { key: "relevance", label: "Relevance", color: "blue", desc: "Does this align with brand priorities, strategic goals, or customer needs? The best signals connect to something that already matters." },
+  { key: "rarity", label: "Rarity", color: "purple", desc: "Is this surprising, unusual, or not widely told? Rarity is what makes someone stop and say: I've never heard it put that way." },
+  { key: "relatability", label: "Relatability", color: "yellow", desc: "Will people get it? Can it land across different audiences — not just insiders?" },
+  { key: "riskReward", label: "Risk", color: "red", desc: "Is it safe to tell? This flags reputational considerations, sensitivities, or timing issues that need to be managed before the story goes anywhere." },
 ];
 
 const DIM_COLORS = {
@@ -282,11 +282,103 @@ JSON schema:
   );
 }
 
+function IntroScreen({ onEnter }) {
+  return (
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-8">
+      <div className="max-w-4xl w-full">
+        <div className="mb-12 text-center">
+          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-400 mb-3">
+            Story Signal
+          </h1>
+          <p className="text-gray-400 text-lg">Narrative Intelligence</p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-8 mb-12">
+          <div>
+            <h2 className="text-xl font-semibold mb-5 text-red-400">Stories disappearing right now</h2>
+            <div className="space-y-3">
+              <div className="bg-gray-800/60 rounded-lg p-4 border-l-2 border-red-500/40">
+                <div className="text-xs text-gray-500 mb-1">Lost in #customer-success</div>
+                <div className="text-sm text-gray-300">"Regional hospital cut ER wait times by 67% using our platform"</div>
+                <div className="text-xs text-red-400 mt-2">Never became a case study</div>
+              </div>
+              <div className="bg-gray-800/60 rounded-lg p-4 border-l-2 border-red-500/40">
+                <div className="text-xs text-gray-500 mb-1">Buried in #engineering</div>
+                <div className="text-sm text-gray-300">"New intern prevented a security breach on day 3"</div>
+                <div className="text-xs text-red-400 mt-2">Perfect recruiting story, missed</div>
+              </div>
+              <div className="bg-gray-800/60 rounded-lg p-4 border-l-2 border-red-500/40">
+                <div className="text-xs text-gray-500 mb-1">Forgotten in a support ticket</div>
+                <div className="text-sm text-gray-300">"This product saved our business during the outage"</div>
+                <div className="text-xs text-red-400 mt-2">Could have been a PR win</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-xl font-semibold mb-5 text-teal-400">What if every story had a score?</h2>
+            <div className="bg-gray-800/60 rounded-lg p-5 mb-4">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <div className="font-semibold text-sm">Hospital ER Story</div>
+                  <div className="text-xs text-gray-500 mt-0.5">Customer call transcript</div>
+                </div>
+                <div className="text-3xl font-bold text-green-400">94</div>
+              </div>
+              <div className="space-y-2">
+                {[
+                  { label: "Resonance", val: 20, color: "bg-pink-400" },
+                  { label: "Relevance", val: 19, color: "bg-blue-400" },
+                  { label: "Rarity", val: 17, color: "bg-purple-400" },
+                  { label: "Relatability", val: 18, color: "bg-yellow-400" },
+                  { label: "Risk", val: 20, color: "bg-red-400" },
+                ].map(d => (
+                  <div key={d.label} className="flex items-center gap-3">
+                    <div className="text-xs text-gray-400 w-24 shrink-0">{d.label}</div>
+                    <div className="flex-1 bg-gray-700 rounded-full h-1.5">
+                      <div className={`h-1.5 rounded-full ${d.color}`} style={{ width: `${(d.val / 20) * 100}%` }} />
+                    </div>
+                    <div className="text-xs text-gray-400 w-6 text-right">{d.val}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-3 text-xs text-teal-400">
+                Perfect for healthcare sales, investor deck, PR campaign
+              </div>
+            </div>
+
+            <div className="bg-gray-800/40 rounded-lg p-4 flex justify-between items-center">
+              <div>
+                <div className="text-sm text-gray-400">Another product launch announcement</div>
+                <div className="text-xs text-gray-600 mt-1">Low resonance, common story, no tension</div>
+              </div>
+              <div className="text-2xl font-bold text-gray-600">23</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center">
+          <button
+            onClick={onEnter}
+            className="bg-teal-600 hover:bg-teal-500 text-white font-semibold px-10 py-3.5 rounded-lg transition-colors text-sm tracking-wide"
+          >
+            Open Story Signal
+          </button>
+          <div className="text-xs text-gray-600 mt-3">Paste any Slack message, customer quote, or support ticket to score it live</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
+  const [intro, setIntro] = useState(true);
   const [stories, setStories] = useState(SEED_STORIES);
   const [selected, setSelected] = useState(SEED_STORIES[1]);
   const [addOpen, setAddOpen] = useState(false);
   const [minScore, setMinScore] = useState(0);
+
+  if (intro) return <IntroScreen onEnter={() => setIntro(false)} />;
 
   const filtered = stories.filter(s => s.score >= minScore).sort((a, b) => b.score - a.score);
 
